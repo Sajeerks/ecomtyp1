@@ -1,0 +1,56 @@
+.banner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100vw;
+  background-image: -webkit-gradient(linear, left bottom, right top, from(#176b3d), color-stop(#6b8974), color-stop(#5b7b5d), color-stop(#4e6d45), to(#445f2d));
+  background-image: linear-gradient(to right top, #176b3d, #6b8974, #5b7b5d, #4e6d45, #445f2d);
+  height: 80vh;
+}
+
+.banner h4 {
+  font-size: 3.2vmax;
+}
+
+.banner h2 {
+  font-size: 2.2vmax;
+}
+
+.banner h5 {
+  font-size: 2vmax;
+}
+
+.prducts_frontpage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: baseline;
+      -ms-flex-pack: baseline;
+          justify-content: baseline;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  width: 100vw;
+  height: 50vh;
+}
+
+h4 {
+  font-size: 2.2vmax;
+}
+/*# sourceMappingURL=Home.css.map */

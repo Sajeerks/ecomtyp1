@@ -1,0 +1,66 @@
+:root{
+  --bgColorRed:100;
+  --bgColorBlue:10;
+  --bgColorGreen:100;
+
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  max-width: 100vw;
+  background-image: linear-gradient(
+    to right top,
+    rgb(var(--bgColorRed), var(--bgColorGreen), var(--bgColorBlue)),
+    #b2d1bc,
+    #acb8ad,
+    #a3ff87,
+    #c4cdbc
+  );
+  height: 80vh;
+
+
+  h4 {
+    font-size: 3.2vmax;
+   
+  }
+
+  h2 {
+    font-size: 4.2vmax;
+    color:rgb(var(--bgColorRed), var(--bgColorGreen), var(--bgColorBlue));
+    // color: rgb(233, 174, 174)
+    
+  
+  }
+
+  h5 {
+    font-size: 2vmax;
+  }
+}
+// .banner::before{
+//    position: absolute;
+//    content: "";
+//    background: rgba(243, 237, 237, 0.07);
+//    z-index: 44;
+//    width: 100%;
+//    height: 100%;
+//      clip-path: ellipse(1000px 1000px at 10% 20%);
+// }
+
+.prducts_frontpage {
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  align-items: center;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  max-width: 100vw;
+  height: 50vh;
+}
+
+h4 {
+  font-size: 2.2vmax;
+}

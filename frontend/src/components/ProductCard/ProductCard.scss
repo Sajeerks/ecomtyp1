@@ -1,0 +1,129 @@
+:root{
+ $base-img:"https://media.istockphoto.com/id/1403478748/photo/martial-arts-fighters-training-in-the-gym.jpg?s=1024x1024&w=is&k=20&c=8-861bvA2Og4tpIvNNhGodO3em4gnYSTTNM-NM5qHjc=";
+}
+// $base-img:url("https://media.istockphoto.com/id/1403478748/photo/martial-arts-fighters-training-in-the-gym.jpg?s=1024x1024&w=is&k=20&c=8-861bvA2Og4tpIvNNhGodO3em4gnYSTTNM-NM5qHjc=")
+
+.product_card_main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 30vh;
+    max-width: 20vw;
+    min-height: 30vh;
+    min-width: 20vw;
+    background-color: aliceblue;
+    // overflow:hidden;;
+    margin-inline: 2vw;
+    transition: all 0.5s;
+    flex-direction: column;
+    border-radius: 5%;
+    word-wrap: break-word;
+    white-space: normal;
+    padding: .1vmax;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.product_card_main h5{
+max-width: inherit;
+    // white-space: normal;
+    // overflow-wrap: break-word;
+word-wrap: break-word;
+text-overflow: ellipsis;
+    // font:600 3vmax "Roboto";
+}
+.product_card_main  p{
+    font-size: 1.2vmax;
+    font-weight: bold;
+    margin: .5vmax 0;
+}
+.product_card_main  span {
+    font-size: 1.5vmax;
+    font-weight: bold;
+
+}
+
+.product_card_main:hover{
+    transform: translate(0,-2vh);
+    transition: all 0.5s;
+}
+
+.product_card_main_details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.product_card_main_details_1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.produt_card_image{
+    height: 10vh;
+//  aspect-ratio: auto;
+// max-width: 3vw;
+    margin-left: 2vw;
+    // height: 25vh;
+    object-fit: cover;
+
+}
+
+.prodcutImage__backgroundCreator{
+  width: 100px;
+  height: 100px;
+  // background: url($base-img);
+  // background: url("https://media.istockphoto.com/id/1403478748/photo/martial-arts-fighters-training-in-the-gym.jpg?s=1024x1024&w=is&k=20&c=8-861bvA2Og4tpIvNNhGodO3em4gnYSTTNM-NM5qHjc=");
+  background-size :100px 100px;
+  // background-repeat: no-repeat;
+  // object-fit: scale-down;
+
+}
+
+
+@media screen and (max-width:600px) {
+  .product_card_main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-height: 35vh;
+    max-width: 20vw;
+    min-height: 20vh;
+    min-width: 20vw;
+    padding: 1vmax;
+  }
+  .product_card_main h5{
+    margin-bottom: 1vh;
+  }
+
+  .product_card_main div{
+    gap :1vh
+  }
+
+  .product_card_main_details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .product_card_main_details_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+  }
+
+  .produt_card_image{
+    max-width: 15vw;
+     height: 10vh;
+    margin-left: 0;
+    // height: 25vh;
+
+  }
+}

@@ -1,0 +1,20 @@
+// .general{
+//     background-color: blue;
+// }
+// $color-succcess: #706caa;
+// $color-error: #dc3545;
+// :export {
+//     colorSuccess: $color-succcess;
+//     colorError: $color-error;
+//   }
+
+// // @import    url("./components/layout/Footer/_Footer.module.scss");
+
+// @import url("./variables/_Varibales.scss");
+// @use "./variables/Varibales.scss" as *
+
+
+body{ 
+  background-color:palegoldenrod;
+  max-width: 100vw;
+}
