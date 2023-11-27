@@ -5,10 +5,10 @@ import React, { Fragment, useEffect, useState } from 'react'
 import "./CartPage.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { Container, Typography } from '@mui/material'
+import { Box, Button, Container, FormControl, InputLabel, Menu, MenuItem, Select, TextField, Typography } from '@mui/material'
 
 // import { styled } from '@mui/material/styles';
-import { loadCartFromLocalstore } from '../../redux/reducers/cartReducer'
+import { addtToCart, loadCartFromLocalstore, removeFromCart } from '../../redux/reducers/cartReducer'
 
 // import { useReactTable } from '@tanstack/react-table'
 
@@ -29,6 +29,7 @@ import {
   // SortingFn,
   // ColumnDef,
   flexRender,
+  getPaginationRowModel,
   // FilterFns,
   // createColumnHelper,
   // ColumnResizeMode,
@@ -36,6 +37,7 @@ import {
 } from '@tanstack/react-table'
 import EditableCell from './EditableCell'
 import QuandityCell from './QuandityCell'
+import { Link } from 'react-router-dom'
 
 
 
@@ -43,7 +45,7 @@ import QuandityCell from './QuandityCell'
 
 const CartPage = () => {
   const dispatch= useDispatch<AppDispatch>()
-  const {orderItems} =useSelector((state:RootState)=>state.cart)
+  const {orderItems, totalPrice, totalQty} =useSelector((state:RootState)=>state.cart)
 
   const [tableData, setdataTable] = useState<ORderITemType[]>([])
  
@@ -86,7 +88,12 @@ const CartPage = () => {
   {
     accessorKey:"image",
     header:"product image",
-    cell:(props:any)=><img src={props.getValue()} style={{width:"40%", }}/>
+    cell:(props:any)=><img src={props.getValue()} style={{width:"50px", }}/>
+  },
+  {
+    accessorKey:"actions",
+    header:"product actions",
+    cell:(props:any)=><p> <Button variant='contained' onClick={()=>{dispatch(removeFromCart(props.row.original.productId))}}>Remove From cart </Button> </p>
   },
 
 ]
@@ -111,6 +118,7 @@ const table = useReactTable({
   getFacetedUniqueValues: getFacetedUniqueValues(),
   getFacetedMinMaxValues: getFacetedMinMaxValues(),
   getSortedRowModel: getSortedRowModel(),
+  getPaginationRowModel:getPaginationRowModel(),
   meta:{
     updateData: (rowIndex:number, columnId:number,value:string)=>setdataTable((prev)=>
       prev.map((row,index)=>
@@ -130,14 +138,15 @@ const table = useReactTable({
 useEffect(() => {
   dispatch(loadCartFromLocalstore())
   
-  }, [])
+  }, [dispatch])
 useEffect(() => {
   setdataTable(orderItems)
 
-}, [orderItems])
+}, [orderItems, dispatch])
 
   return (
    <Fragment>
+    {orderItems.length ===0 ? <Fragment> <Box sx={{width:"100vw", height:"70vh" , alignItems:"center" , display:"flex",justifyContent:'center'}}><Link  to ="/"> Cart is empty Gotto products & purchase</Link> </Box>  </Fragment> :<Fragment> 
          <Container sx={{width:"100vw",overflowX:"scroll"}} >
            <Typography textAlign={"center"} variant='h3'>Cart items</Typography>
 
@@ -149,7 +158,7 @@ useEffect(() => {
 
 
 
-  <table className="table"  style={{width:table.getTotalSize()}}>
+  <table className="table"  style={{width:table.getTotalSize(),justifyContent:"flex-start"}}>
   <thead>
     {table.getHeaderGroups().map(headerGroup=><tr className="tr" key={headerGroup.id}>
       {
@@ -245,11 +254,77 @@ useEffect(() => {
 
   </div>
 
-
-
+  <hr />
+ 
 
 
          </Container>
+         <div className='cart_total_div'>
+   <Typography variant='h5'>Total Price = {totalPrice}</Typography>
+   <Typography variant='h5'>Total Quantity ={totalQty}</Typography>
+   <Button variant="contained" > <Link to="/shippinginfo">Proceed to Pay </Link></Button>
+
+  </div>
+         <div className='pagination_div'>
+    <div>
+    <Button variant="contained" sx={{mx:2}} onClick={()=>table.setPageIndex(0)}>First page</Button>
+    <Button variant="contained" sx={{mx:2}}  disabled={!table.getCanPreviousPage()} onClick={()=>table.previousPage()}>prev page</Button>
+    <Button variant="contained"  sx={{mx:2}} disabled={!table.getCanNextPage()} onClick={()=>table.nextPage()}>next page</Button>
+
+
+    <Button variant="contained"  onClick={()=>table.setPageIndex(table.getPageCount()-1)}>Last page</Button>
+    </div>
+
+  <hr />
+  <div>
+
+ 
+  <ul>
+    <li>
+        "you are in page no -{" "} {table.options.state.pagination?.pageIndex!}
+    </li>
+    <li>
+        Total pages ={table.getPageCount()-1}
+    </li>
+    <li>
+    Jump to Page =     <TextField type="number" 
+        defaultValue={table.options.state.pagination?.pageIndex || 0} 
+        // value={table.options.state.pagination?.pageIndex }
+        onChange={(e)=>table.setPageIndex(Number(e.target.value)  )}
+        
+        
+        />
+    </li>
+  </ul>
+  <hr /> 
+  <h4>Current page SIze = {table.options.state.pagination?.pageSize}</h4>
+  <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-filled-label">Pagesize</InputLabel>
+  <Select value={table.options.state.pagination?.pageSize}
+   defaultValue={3}
+  onChange={e=>{
+    table.setPageSize(Number(e.target.value)) 
+  
+  } }
+  fullWidth
+//   defaultValue={table.options.state.pagination?.pageSize}
+  >
+    
+{[3,5,10].map((pagesizeEl )=>{
+return(
+    <MenuItem key={pagesizeEl} value={pagesizeEl || ""}>
+{pagesizeEl}
+    </MenuItem>
+   
+)
+})}
+
+
+  </Select>
+  </FormControl>
+  </div>
+  </div>
+  </Fragment>}
    </Fragment>
   )
 }
@@ -326,9 +401,9 @@ function Filter({
     </div>
   ) : (
     <>
-      <datalist id={column.id + 'list'}>
+      <datalist id={column.id + 'list'} >
         {sortedUniqueValues.slice(0, 5000).map((value: any) => (
-          <option value={value} key={value} />
+          <option value={value} key={value +"list"}  />
         ))}
       </datalist>
       <DebouncedInput

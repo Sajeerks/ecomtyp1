@@ -5,7 +5,8 @@ import cors from 'cors'
 import fileUpload from 'express-fileupload'
 export const app = express()
 import {ErrorMiddleWare} from "./middleware/errorMaker"
-
+import dotenv from 'dotenv'
+dotenv.config({path:"../backend/config/config.env"})
 
 app.use(express.json())
 app.use(cookieParser())
@@ -16,6 +17,10 @@ app.use(cors())
 import { productRouter  } from './routes/productRoute'
 import { userRouter } from './routes/userRoute'
 import { orderRouter } from './routes/orderRoute'
+import { paymentRouter } from './routes/paymentRoutes'
+
+
+
 
 
 
@@ -23,6 +28,8 @@ import { orderRouter } from './routes/orderRoute'
 app.use( '/api/v1',productRouter)
 app.use( '/api/v1',userRouter)
 app.use( '/api/v1',orderRouter)
+app.use( '/api/v1',paymentRouter)
+
 
 
 

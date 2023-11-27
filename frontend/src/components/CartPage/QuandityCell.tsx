@@ -4,14 +4,17 @@ import MenuItem from '@mui/material/MenuItem';
 // import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store';
+import { addtToCartFromCartPage } from '../../redux/reducers/cartReducer';
 
 
 const QuandityCell = ({getValue,row, column,table}:any) => {
   const intitalValue = getValue()
   // console.log(getValue());
-//   console.log({intitalValue})
-
-    const [value , setvalue ] = useState<string>(intitalValue)
+  // console.log({intitalValue })
+  const dispatch = useDispatch<AppDispatch>()
+    const [value , setvalue ] = useState<string>(intitalValue || 0)
 
 
     const onBlur =()=>{
@@ -21,15 +24,17 @@ const QuandityCell = ({getValue,row, column,table}:any) => {
           value
         )
       }
-      
+      // console.log(row);
 
     const handleChange = (event: SelectChangeEvent) => {
     //   setAge(event.target.value as string);
-    setvalue(event.target.value as string);
+    setvalue(event.target.value as string );
+
+    dispatch(addtToCartFromCartPage({singleProductDetail:row?.original,cartQty:Number(event.target.value) }))
     };
   
 
-   const listOFAray =  [...Array(50).keys()];
+   const listOFAray =  [...Array(100).keys()];
 
   return (
     
@@ -50,7 +55,7 @@ const QuandityCell = ({getValue,row, column,table}:any) => {
    
         {listOFAray.map((item, index)=>(
             
-   <MenuItem key={index} value={item}>{item}</MenuItem>
+   <MenuItem key={index} value={item+1}>{item+1}</MenuItem>
         ))}
      
         {/* <MenuItem value={20}>Twenty</MenuItem>

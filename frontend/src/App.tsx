@@ -34,6 +34,13 @@ import { resetMessageForSingleProductReducer } from './redux/reducers/singleProd
 import AllProductsPage from './components/AllProductsPage/AllProductsPage';
 import SpeedDialOptions from './components/SpeedDialOptions/SpeedDialOptions';
 import CartPage from './components/CartPage/CartPage';
+import Payment from './components/Payment/Payment';
+
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from 'axios';
+import ShippingIInfo from './components/ShippingIInfo/ShippingIInfo';
+import Success from './components/Success/Success';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -100,14 +107,28 @@ const App = () => {
   const [darkThemer, setdarkTheme] = useState(false)
   // console.log({darkThemer})
 
+  const [stripeApiKey, setstripeApiKey] = useState("")
+
+  async function getStripeApiKey() {
+    const {data} = await axios.get("/api/v1/stripeapikey")
+    // console.log({data});
+    setstripeApiKey(data.stripeApikey)
+  }
+ 
+
+
   useEffect(() => {
     dispatch(getAutheticatedUserME())
     dispatch(resetMessageForSingleProductReducer())
-  
+    getStripeApiKey()
     return () => {
       
     }
   }, [])
+
+  
+
+  
   
   return (
     <>
@@ -117,8 +138,26 @@ const App = () => {
       < Header  setdarkTheme={setdarkTheme} darkThemer={darkThemer} loggedInUser={loggedInUser}  />
 
       <SpeedDialOptions/>
+      {   stripeApiKey &&   <Elements stripe={loadStripe(stripeApiKey)} >
+      <Routes>
    
+     
+      <Route path="/payment" element={<ProtectedRoute isAdmin={false}/>} >
+      <Route index element={<Payment/>} />
+      <Route path="success" element={<Success/>} />
+
+    </Route>
+
+    <Route path="/shippinginfo" element={<ProtectedRoute isAdmin={false}/>} >
+      <Route index element={<ShippingIInfo/>} />
+    </Route>
+
+      </Routes>
+      
+      </Elements>}
   <Routes>
+
+   
     <Route path='/' element={<Home/>} />
     <Route path='/counter' element={<Counter/>} />
 
@@ -145,8 +184,10 @@ const App = () => {
     </Route>
 
     <Route path="/" element={<ProtectedRoute isAdmin={false}/>} >
+
       <Route path='/account' element={<AccountPage/>} />
     </Route>
+
 
 
 <Route path='/allProducts' element={<AllProductsPage/>} />

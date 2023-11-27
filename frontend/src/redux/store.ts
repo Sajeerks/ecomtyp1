@@ -9,6 +9,9 @@ import userSlice from './reducers/userSlice'
 import  getUserSlice  from './reducers/userSlice22'
 import getSingleProductsSilce  from './reducers/singleProductReducer'
 import  getAllUsersSlice  from './reducers/allUsers'
+import orderSlice from './reducers/orderSlice'
+
+
 
 // import {
 //     persistStore,
@@ -42,6 +45,7 @@ const store = configureStore({
         product:getSingleProductsSilce,
         allUsers:getAllUsersSlice,
         cart:cartSlice,
+        order:orderSlice,
 
     }
 })
