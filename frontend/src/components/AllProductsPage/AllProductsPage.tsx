@@ -3,20 +3,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
 import Loading from '../Loading/Loading'
 import "./AllProductsPage.scss"
-import { Button, MenuItem, Rating, Select, Typography } from '@mui/material'
+import { Button, MenuItem, Rating, Select, Slider, Typography } from '@mui/material'
 import ProductCard from '../ProductCard/ProductCard'
 import ReactPaginate from 'react-paginate';
 import { fetchProducts22, resetKeywoed } from '../../redux/reducers/productReducer22'
 import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import { useDebounce } from '../layout/Header/Header'
+// import Slider from '@mui/material/Slider';
+// import { useDebounce } from '../layout/Header/Header'
 import { categories } from '../CreateProduct/CreateProduct'
 import { SelectChangeEvent } from "@mui/material";
 
 const AllProductsPage = () => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const {loading:allProductsLoading, error:allProductsError, products, filteredProductsCount} = useSelector((state:RootState)=>state.productsreducer)
+    const {loading:allProductsLoading, products, filteredProductsCount} = useSelector((state:RootState)=>state.productsreducer)
      const [pageNumber, setpageNumber] = useState(0)
     
 
@@ -47,7 +47,7 @@ function valuetext(value: number) {
 }
 const [value, setValue] = React.useState<number[]>([0, 99999]);
 
-const handleChangeForSlider = (event: Event, newValue: number | number[]) => {
+const handleChangeForSlider = (_event: Event, newValue: number | number[]) => {
   // console.log({value});
   setValue(newValue as number[]);
 };
@@ -96,7 +96,7 @@ dispatch(resetKeywoed())
                 <Box sx={{ width: "100%" , height:"100%"}} display={"flex"} justifyContent={"center"} alignItems={"center"} flexDirection={"column"}>
                 <Typography textAlign={"center"}>Rating</Typography>
 
-                <Rating value={ratingFilter}  onChange={(event, newValue) => {setratingFilter(newValue  as number || 0) }}  />
+                <Rating value={ratingFilter}  onChange={(_event, newValue) => {setratingFilter(newValue  as number || 0) }}  />
                 </Box>
 
      <Box sx={{ width: "90%" ,mx:10 }} display={"flex"} justifyContent={"center"} alignItems={"center"} flexDirection={"column"} >
@@ -162,7 +162,7 @@ dispatch(resetKeywoed())
     <Button  variant="contained" onClick={resetAllFilters}>Reset Filters</Button>        
             </div>
          <div className='allProducts_Main_div_card_div'>
-            {products.length>0 ? products.map((product, index)=>(
+            {products.length>0 ? products.map((product, _index)=>(
 
                 <div key={product._id} className='allProducts_Main_div_card_div__item'>
                 <ProductCard product={product} key={product._id}/>

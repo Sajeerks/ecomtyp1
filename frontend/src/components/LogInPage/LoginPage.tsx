@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
 import { loginUser } from '../../redux/reducers/userSlice22'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { resetMessageForSingleProductReducer } from '../../redux/reducers/singleProductReducer'
 
 const LoginPage = () => {
@@ -134,6 +134,9 @@ useEffect(() => {
            >
             Login
            </Button>
+
+
+           <Link style={{marginTop:"2vh", marginRight:"50vw"}} to="/forgotpassword">Forgot Password</Link>
  
      </Box> 
  </Container>

@@ -12,21 +12,25 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+// import MailIcon from '@mui/icons-material/Mail';
+// import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Avatar,  Divider } from '@mui/material';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { AppDispatch,} from '../../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState,} from '../../../redux/store';
 // import { getCount} from '../../../redux/reducers/postSlice';
 import { logOutUser, resetSingleUserMessage, userTypeInFrontEnd } from '../../../redux/reducers/userSlice22';
 import { toast } from 'react-toastify';
 import MainLeftDrawer from "./MainLeftDrawer.tsx"
 import { fetchProducts22, saveKeyword } from '../../../redux/reducers/productReducer22.ts';
 // import SpeedDialOptions from '../../SpeedDialOptions/SpeedDialOptions.tsx';
+// import ContactPageIcon from '@mui/icons-material/ContactPage';
+import CallIcon from '@mui/icons-material/Call';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HomeIcon from '@mui/icons-material/Home';
 
 
 export const useDebounce = (value:string, milliSeconds:number) => {
@@ -96,7 +100,8 @@ interface HeaderProps{
 export default function PrimarySearchAppBar({setdarkTheme, darkThemer, loggedInUser}:HeaderProps) {
   // const count =  useSelector(getCount)
   const dispatch = useDispatch<AppDispatch>()
-
+  const {orderItems} = useSelector((state:RootState)=>state.cart)
+  const cartItmesCount = orderItems.length
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -239,25 +244,34 @@ navigate("/allProducts")
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+         <MenuItem onClick={()=>{navigate("/") ; setMobileMoreAnchorEl(null)} }>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
+         
+            <HomeIcon />
+          
         </IconButton>
-        <p>Messages</p>
+        <p>Home</p>
       </MenuItem>
       <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={()=>{navigate("/cart"); setMobileMoreAnchorEl(null)}}>
+          <Badge badgeContent={cartItmesCount} color="error">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+        <p>Cart</p>
+      </MenuItem>
+      <MenuItem   onClick={()=>{navigate("/contactform"); setMobileMoreAnchorEl(null)}}>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
+        
         >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
+          {/* <Badge badgeContent={17} color="error"> */}
+            <CallIcon /> 
+          {/* </Badge> */}
         </IconButton>
-        <p>Notifications</p>
+        <p>Contact</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -336,10 +350,10 @@ navigate("/allProducts")
 
 
           <Box sx={{ flexGrow: 1 }}>
-     <Link to="/cart">Cart</Link>
+     {/* <Link to="/cart">Cart</Link> */}
 
           </Box> 
-          <Divider orientation="vertical" flexItem sx={{background:"white" , margin:"1vw"}} />
+          {/* <Divider orientation="vertical" flexItem sx={{background:"white" , margin:"1vw"}} /> */}
           
        
           <Box >
@@ -349,18 +363,19 @@ navigate("/allProducts")
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+              <Badge badgeContent={cartItmesCount} color="error">
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
+              onClick={()=>{navigate("/contactForm")}}
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
+              {/* <Badge badgeContent={17} color="error"> */}
+                <CallIcon />
+              {/* </Badge> */}
             </IconButton>
             <IconButton
               size="large"

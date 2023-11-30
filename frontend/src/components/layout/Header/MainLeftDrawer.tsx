@@ -66,13 +66,13 @@ export default function TemporaryDrawer({openDrawer}:TemporaryDrawerPropsType) {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['orders/allorders'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={()=>navigate(`/${text}`)}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text.replace("orders/","")} />
             </ListItemButton>
           </ListItem>
         ))}

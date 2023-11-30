@@ -5,10 +5,10 @@ import React, { Fragment, useEffect, useState } from 'react'
 import "./CartPage.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { Box, Button, Container, FormControl, InputLabel, Menu, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, Container, FormControl, InputLabel,  MenuItem, Select, TextField, Typography } from '@mui/material'
 
 // import { styled } from '@mui/material/styles';
-import { addtToCart, loadCartFromLocalstore, removeFromCart } from '../../redux/reducers/cartReducer'
+import {  loadCartFromLocalstore, removeFromCart } from '../../redux/reducers/cartReducer'
 
 // import { useReactTable } from '@tanstack/react-table'
 
@@ -39,7 +39,8 @@ import EditableCell from './EditableCell'
 import QuandityCell from './QuandityCell'
 import { Link } from 'react-router-dom'
 
-
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 
 
@@ -176,7 +177,7 @@ useEffect(() => {
           <>
        <div>
        {flexRender(header.column.columnDef.header, header.getContext())}
-       {{asc:"-UP", desc:"-DOWN", null:""}[header.column.getIsSorted() ==="asc"?"asc":header.column.getIsSorted() ==="desc"?"desc":"null"]}
+       {{asc:<ArrowUpwardIcon/>, desc:<ArrowDownwardIcon/>, null:""}[header.column.getIsSorted() as string ?? null]}
        </div>
       
       

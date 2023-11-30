@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, {  useState } from 'react'
 import { increment, decrement ,reset, increaseByAmount} from '../../redux/reducers/counterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { Box, Button, Card, TextField } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
 
 const Counter = () => {
     const count = useSelector((state:RootState)=>state.counter.count)

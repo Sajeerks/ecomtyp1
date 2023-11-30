@@ -41,6 +41,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from 'axios';
 import ShippingIInfo from './components/ShippingIInfo/ShippingIInfo';
 import Success from './components/Success/Success';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import PasswordReset from './components/PasswordReset/PasswordReset';
+import OrdersList from './components/OrdersList/OrdersList';
+import OrderSingle from './components/OrderSingle.tsx/OrderSingle';
+import ContactForm from './components/ContactForm/ContactForm';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -135,31 +140,38 @@ const App = () => {
         <ThemeProvider theme={darkThemer?darkTheme:theme}>
           <CssBaseline/>
     <BrowserRouter>
-      < Header  setdarkTheme={setdarkTheme} darkThemer={darkThemer} loggedInUser={loggedInUser}  />
+    < Header  setdarkTheme={setdarkTheme} darkThemer={darkThemer} loggedInUser={loggedInUser}  />
 
       <SpeedDialOptions/>
       {   stripeApiKey &&   <Elements stripe={loadStripe(stripeApiKey)} >
       <Routes>
-   
-     
+
       <Route path="/payment" element={<ProtectedRoute isAdmin={false}/>} >
       <Route index element={<Payment/>} />
       <Route path="success" element={<Success/>} />
-
-    </Route>
-
-    <Route path="/shippinginfo" element={<ProtectedRoute isAdmin={false}/>} >
-      <Route index element={<ShippingIInfo/>} />
-    </Route>
-
+       </Route>
       </Routes>
       
       </Elements>}
   <Routes>
 
    
+  <Route path="/shippinginfo" element={<ProtectedRoute isAdmin={false}/>} >
+      <Route index element={<ShippingIInfo/>} />
+    </Route>
+    {/* <Route path="/orders" element={<ProtectedRoute isAdmin={false}/>} >
+      <Route path="allorders" element={<OrdersList/>} />
+    </Route> */}
+
+    <Route path="/orders/allorders" element={<OrdersList/>} />
+    <Route path="/orders/order/:orderId" element={<OrderSingle/>} />
+    <Route path="/forgotpassword" element={<ForgotPassword/>} />
+    <Route path="/password/reset/:resetPasswordTokenFromUrl" element={<PasswordReset/>} />
+
+
     <Route path='/' element={<Home/>} />
     <Route path='/counter' element={<Counter/>} />
+
 
 
 
@@ -183,17 +195,17 @@ const App = () => {
       
     </Route>
 
-    <Route path="/" element={<ProtectedRoute isAdmin={false}/>} >
+    <Route path="/account" element={<ProtectedRoute isAdmin={false}/>} >
 
-      <Route path='/account' element={<AccountPage/>} />
+      <Route index element={<AccountPage/>} />
     </Route>
 
 
 
 <Route path='/allProducts' element={<AllProductsPage/>} />
-    <Route path="/" element={<ProtectedRoute isAdmin={true}/>} >
+    <Route path="/allUsersList" element={<ProtectedRoute isAdmin={true}/>} >
 
-    <Route  path="allUsersList" element={<UserList/>}  />
+    <Route  index element={<UserList/>}  />
     </Route>
     
 
@@ -217,6 +229,7 @@ const App = () => {
                 
     </Route>
 
+    <Route path="/contactForm" element={<ContactForm/>} />
    
 
 {/* <Route path="*" element={<Navigate to="/" replace/>} /> */}

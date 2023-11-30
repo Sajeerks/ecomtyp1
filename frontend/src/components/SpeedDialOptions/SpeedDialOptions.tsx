@@ -78,7 +78,7 @@ var width = positionInfo.width;
 
 console.log({height,width});
 
-     pdf.addImage(imgData,"JPEG",0,0,width*.264,height*.264, 'FAST')
+     pdf.addImage(imgData,"JPEG",0,0,width*.2,height*.2, 'FAST')
         pdf.save("download.pdf");
 
 }

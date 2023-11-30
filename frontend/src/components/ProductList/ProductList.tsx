@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import {  fetAllProductsAdmin, fetchProducts22, resetAllProductsReducer } from '../../redux/reducers/productReducer22'
+import {  ProductTypeFrontend, fetAllProductsAdmin, fetchProducts22, resetAllProductsReducer } from '../../redux/reducers/productReducer22'
 import Loading from '../Loading/Loading'
 import { DataGrid, GridCellParams, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material'
@@ -23,7 +23,7 @@ const ProductList = () => {
 
     const [idChnager, setidChnager] = useState(false)
 
-    
+    const [allproductsstate, setallproductsstate] = useState<ProductTypeFrontend[] |  null >(null)
     
 
 
@@ -35,6 +35,7 @@ interface IDTyoe{
     //  console.log(id);
      setidChnager(true)
      dispatch(deleteSingleProduct(id))
+  
     }
    
     const columns: GridColDef[] = [
@@ -142,21 +143,22 @@ interface IDTyoe{
       if(typeof product === "string"){
         toast.success(product)
       }
-      dispatch(resetAllProductsReducer())
-      dispatch(resetSingleProductReducer())
-      dispatch(fetchProducts22({keyword:"", page:1,price:[0,99999],ratings:0, category:null}))
+      // dispatch(resetAllProductsReducer())
+      // dispatch(resetSingleProductReducer())
+      // dispatch(fetchProducts22({keyword:"", page:1,price:[0,99999],ratings:0, category:null}))
       
-    }, [dispatch, product,])
+    }, [ product])
     
 
 useEffect(() => {
   console.log({idChnager});
+ 
   // dispatch(resetAllProductsReducer())
-  dispatch(fetchProducts22({keyword:"", page:1,price:[0,99999],ratings:0, category:null}))
+  // dispatch(fetchProducts22({keyword:"", page:1,price:[0,99999],ratings:0, category:null}))
  
 
   
-}, [])
+}, [idChnager])
 
 
 
@@ -179,10 +181,11 @@ useEffect(() => {
 useEffect(() => {
   if(productMessage){
     toast.success(productMessage)
+    dispatch(fetAllProductsAdmin())
   }
 
   return () => {
-   dispatch(resetAllProductsReducer())
+  //  dispatch(resetAllProductsReducer())
   }
 }, [productMessage])
 
@@ -190,7 +193,12 @@ useEffect(() => {
 useEffect(() => {
   dispatch(fetAllProductsAdmin())
   }, [])
-  
+
+ 
+  useEffect(() => {
+    setallproductsstate(products)
+  }, [loading])
+  console.log(allproductsstate);
 
     // type ROwType = Omit<ProductTypeFrontend , "reviews" |"images"| "numberOfReviews" |"createdAt" |"user" >
 
@@ -204,7 +212,7 @@ useEffect(() => {
        description:string
     } 
     const rows:ROwType[]= []
-    products && products.forEach(product=>{
+    allproductsstate && allproductsstate.forEach(product=>{
         rows.push({
             "id":product._id!,
 "name":product.name,

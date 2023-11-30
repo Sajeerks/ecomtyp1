@@ -2,7 +2,7 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState } from '../store';
+// import { RootState } from '../store';
 
 
 
@@ -51,7 +51,7 @@ export const createNewOrder = createAsyncThunk(  "orders/createNewOrder",  async
       },
        withCredentials:true
     })
-   console.log( "data==",data)
+  //  console.log( "data==",data)
       return data;
     } catch (error:any) {
       // return error as Error
@@ -67,11 +67,93 @@ export const createNewOrder = createAsyncThunk(  "orders/createNewOrder",  async
 
 
 
+  export const getAllOrdersFrontend = createAsyncThunk(  "orders/getAllOrdersFrontend",  async ( _, thunkApi) => {
+    try {
+    
+      const { data } = await axios.get(   `/api/v1/order/allordres`,{
+        headers:{
+        //   'Content-type': "multipart/form-data",
+          'Content-type': 'application/json',
+  
+      },
+       withCredentials:true
+    })
+  //  console.log( "data==",data)
+      return data;
+    } catch (error:any) {
+      // return error as Error
+      console.log(error)
+  
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  }
+  );
+  
 
+
+  export const getSingleOrderForntend = createAsyncThunk(  "orders/getSingleOrderForntend",  async ( {orderId}:{orderId:string}, thunkApi) => {
+    try {
+    
+      const { data } = await axios.get(   `/api/v1/order/${orderId}`,{
+        headers:{
+        //   'Content-type': "multipart/form-data",
+          'Content-type': 'application/json',
+  
+      },
+       withCredentials:true
+    })
+  //  console.log( "data==",data)
+      return data;
+    } catch (error:any) {
+      // return error as Error
+      console.log(error)
+  
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  }
+  );
+  
+interface updateOrderType{
+  orderId:string,
+  status:string
+}
+
+  export const updateOrderStatusFrontEnd = createAsyncThunk(  "orders/updateOrderStatusFrontEnd",  async ( {orderId,status}:updateOrderType, thunkApi) => {
+    try {
+    console.log(orderId);
+    console.log(status);
+
+
+      const { data } = await axios.put(   `/api/v1/order/${orderId}`,{status},{
+        headers:{
+        //   'Content-type': "multipart/form-data",
+          'Content-type': 'application/json',
+  
+      },
+       withCredentials:true
+    })
+  //  console.log( "data==",data)
+      return data;
+    } catch (error:any) {
+      // return error as Error
+      console.log(error)
+  
+      return thunkApi.rejectWithValue(error.response.data);
+    }
+  }
+  );
+
+
+
+  // updateOrderStatus
+
+  // allOrders,
+  //     totalAmount
 
 
 
 interface OrderItemsType {
+  _id?:string
     price: number,
     name:string,
     quantity: number,
@@ -80,8 +162,9 @@ interface OrderItemsType {
 }
 
 
-interface OrderType{
-    orderitems:OrderItemsType[]  ,
+export  interface OrderType{
+  _id?:string
+  orderItems:OrderItemsType[]  ,
     paymentInfo:{
         id:string,
         status:string
@@ -90,6 +173,7 @@ interface OrderType{
     taxPrice:number,
     totalPrice:number,
     shippingPrice:number,
+    orderStatus?:string
     shippingInfo:{
         address:string,
         city:string,
@@ -97,7 +181,8 @@ interface OrderType{
         state:string,
         phoneNo:number,
         pinCode:number
-    }
+    },
+   
 
 }
 
@@ -107,7 +192,8 @@ interface intitStateForOrders {
     singleOrder:OrderType |  null
     loading: boolean;
     error: string | null;
-    message: string | null;
+    message: string | null
+    totalAmount:number
   
   }
   const initialState: intitStateForOrders = {
@@ -116,6 +202,7 @@ interface intitStateForOrders {
     loading: false,
     error: null,
     message:null,
+    totalAmount:0,
    
   };
   
@@ -133,10 +220,12 @@ interface intitStateForOrders {
         .addCase(createNewOrder.pending, (state) => {
           state.loading = true;
           state.error = null;
+          state.message =null
         })
         .addCase(createNewOrder.fulfilled, (state, action) => {
           state.loading = false;
           state.singleOrder = action.payload.newOrder ;
+          state.message ="new order created successfully"
          
         })
         .addCase(createNewOrder.rejected, (state, action:any) => {
@@ -144,8 +233,71 @@ interface intitStateForOrders {
           state.error = action.error.message || 'Something went wrong';
           state.message =   action.payload.error.split(/\r?\n/)[0]   || 'Something went wrong';
         })
+
+        .addCase(getAllOrdersFrontend.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message =null
+        })
+        .addCase(getAllOrdersFrontend.fulfilled, (state, action) => {
+          state.loading = false;
+          state.orders = action.payload.allOrders 
+          state.totalAmount = action.payload.totalAmount
+         
+        })
+        .addCase(getSingleOrderForntend.rejected, (state, action:any) => {
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || 'Something went wrong';
+        })
+        
+        .addCase(getSingleOrderForntend.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message =null
+        })
+        .addCase(getSingleOrderForntend.fulfilled, (state, action) => {
+          state.loading = false;
+          state.singleOrder = action.payload.singleOrder 
+          state.totalAmount = action.payload.totalAmount
+         
+        })
+        .addCase(getAllOrdersFrontend.rejected, (state, action:any) => {
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || 'Something went wrong';
+        })
+        
+           
+        .addCase(updateOrderStatusFrontEnd.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message =null
+        })
+        .addCase(updateOrderStatusFrontEnd.fulfilled, (state, action) => {
+          state.loading = false;
+          state.singleOrder = action.payload.order 
+          state.message ="order updates successfully"
+          
+         
+        })
+        .addCase(updateOrderStatusFrontEnd.rejected, (state, action:any) => {
+          state.loading = false;
+          state.error = action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]   || 'Something went wrong';
+        })
+        
+        
   
-    
+
+
+
+        
+  
+
+        
+        
+        
   
     }
   

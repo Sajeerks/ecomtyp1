@@ -36,14 +36,14 @@ export const loginUser = createAsyncThunk(  "user/loginUser",  async (loginDetai
     try {
      
   // console.log({loginDetails})
-      // const { data } = await axios.get(   `/api/v1/logout`,{
-      //     headers:{
-      //       'Content-type': 'application/json',
-      //   },
-      //    withCredentials:true
-      // });
+      const { data } = await axios.get(   `/api/v1/logout`,{
+          headers:{
+            'Content-type': 'application/json',
+        },
+         withCredentials:true
+      });
 //  console.log( "data.user==",data.user)
-      // return data.user;
+      return data;
     } catch (error:any) {
       // return error as Error
       console.log(error)
@@ -119,6 +119,60 @@ export const changeUserRoleAdmin = createAsyncThunk(  "user/changeUserRoleAdmin"
   }
 }
 );
+
+
+
+
+export const forGotPasswordActionFrontend = createAsyncThunk(  "user/forGotPasswordActionFrontend",  async (email:{email:string}, thunkApi) => {
+  try {
+   
+// console.log({loginDetails})
+    const { data } = await axios.put(   `/api/v1/forgotPassword`,email,{
+        headers:{                           
+          'Content-type': 'application/json',
+      },
+       withCredentials:true
+    });
+//  console.log( "data get authenticat", data)
+    return data;
+  } catch (error:any) {
+    // return error as Error
+    console.log(error)
+
+    return thunkApi.rejectWithValue(error.response.data);
+  }
+}
+);
+
+interface ResetPasswordType{
+  password:string,
+  confirmPassword:string
+  resetPasswordTokenFromUrl:string
+}
+
+export const resetPasswordActionFrontend = createAsyncThunk(  "user/resetPasswordActionFrontend",  async ({resetPasswordTokenFromUrl,password,confirmPassword}:ResetPasswordType, thunkApi) => {
+  try {
+   
+// console.log({loginDetails})
+    const { data } = await axios.put(   `/api/v1/password/reset/${resetPasswordTokenFromUrl}`,{password,confirmPassword},{
+        headers:{                           
+          'Content-type': 'application/json',
+      },
+       withCredentials:true
+    });
+//  console.log( "data get authenticat", data)
+    return data;
+  } catch (error:any) {
+    // return error as Error
+    console.log(error)
+
+    return thunkApi.rejectWithValue(error.response.data);
+  }
+}
+);
+
+
+
 
 
 
@@ -376,11 +430,45 @@ export const getUserSlice = createSlice({
           state.error =    action.payload as string ||   action.error.message || 'Something went wrong';
           state.message =   action.payload.error.split(/\r?\n/)[0]  ||  "change password  user failed"
         })  
+        .addCase(forGotPasswordActionFrontend.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+        })
+        .addCase(forGotPasswordActionFrontend.fulfilled, (state, action:any) => {
+          state.loading = false;
+          // state.user = action.payload.user
+          state.message = action.payload.message 
+        })
+        .addCase(forGotPasswordActionFrontend.rejected, (state, action:any) => {
+          state.loading = false;
+          state.error =    action.payload as string ||   action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]  ||  "change password  user failed"
+        })  
+        .addCase(resetPasswordActionFrontend.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+          state.message = null
+        })
+        .addCase(resetPasswordActionFrontend.fulfilled, (state, action:any) => {
+          state.loading = false;
+          // state.user = action.payload.user
+          state.message = action.payload.message 
+        })
+        .addCase(resetPasswordActionFrontend.rejected, (state, action:any) => {
+          state.loading = false;
+          state.error =    action.payload as string ||   action.error.message || 'Something went wrong';
+          state.message =   action.payload.error.split(/\r?\n/)[0]  ||  "reset password  user failed"
+        })  
+      
+      
       
         
 
-
+        
       
+        
+
         
         
 
