@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import {  ProductTypeFrontend, fetAllProductsAdmin, fetchProducts22, resetAllProductsReducer } from '../../redux/reducers/productReducer22'
+import {  ProductTypeFrontend, fetAllProductsAdmin} from '../../redux/reducers/productReducer22'
 import Loading from '../Loading/Loading'
 import { DataGrid, GridCellParams, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material'
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import "./ProductList.scss"
 import clsx from 'clsx';
-import { deleteSingleProduct, resetSingleProductReducer } from '../../redux/reducers/singleProductReducer'
+import { deleteSingleProduct } from '../../redux/reducers/singleProductReducer'
 import BuildIcon from '@mui/icons-material/Build';
 
 
