@@ -1,7 +1,7 @@
 import { ProductType } from "./../models/productModel";
 
 import { NextFunction, Request, RequestHandler, Response } from "express";
-import { productModel } from "../models/productModel";
+// import { productModel } from "../models/productModel";
 import { ErrorHandler } from "../utils/errorHandler";
 import { catchAsyncErrors } from "../middleware/catchAsyncErrors";
 
@@ -116,9 +116,9 @@ export const forgotPassword = catchAsyncErrors(
     const resetToken = await user.getResetPasswordToken();
 
     await user.save({ validateBeforeSave: false });
-    const resetPassordPasswordUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/api/v1/password/reset/${resetToken}`;
+    // const resetPassordPasswordUrl = `${req.protocol}://${req.get("host" )}/api/v1/password/reset/${resetToken}`;
+    const resetPassordPasswordUrl = `${process.env.FRONTEND_URL!}/password/reset/${resetToken}`;
+
 
     const message = `Your password reset token is : =\n\n ${resetPassordPasswordUrl}  \n\n if 
      you have not requeseted this email please ignore this`;

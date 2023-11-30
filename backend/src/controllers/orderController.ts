@@ -126,7 +126,7 @@ if(!order){
   return next(new ErrorHandler("the order withthe id is not found", 404))
 }
 
-if(order.orderStatus == "Delivered"){
+if(order.orderStatus === "Delivered"){
   return next(new ErrorHandler("You have already delivered the items", 401))
 }
 
