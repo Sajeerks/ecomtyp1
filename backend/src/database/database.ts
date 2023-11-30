@@ -5,6 +5,7 @@ import mongoose  from "mongoose";
   export const connectToDatabase = () =>  mongoose.connect(String(process.env.MONGO_DB_URI!)
   
   
+  
 //   , 
 
 // {
