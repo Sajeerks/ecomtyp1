@@ -22,7 +22,7 @@ export default defineConfig({
       // }
 
   
-      "/api/v1/": {
+      "/api/v1": {
         target: 'https://et1-4efd4e5170d2.herokuapp.com',
         changeOrigin: true, 
         
