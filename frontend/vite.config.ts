@@ -20,14 +20,14 @@ export default defineConfig({
       //   secure:false,
       //   // ws:true
       // }
-   "/api":'https://et1-4efd4e5170d2.herokuapp.com'
+  //  "/api":'https://et1-4efd4e5170d2.herokuapp.com'
   
-      // "/api/v1": {
-      //   target: 'https://et1-4efd4e5170d2.herokuapp.com',
-      //   changeOrigin: true, 
+      "/api/v1": {
+        target: 'https://et1-4efd4e5170d2.herokuapp.com',
+        changeOrigin: true, 
         
-      //   secure:false,
-      //   // ws:true
+        secure:false,
+        ws:true
 
 
       // //   // configure: (proxy, _options) => {
@@ -42,7 +42,7 @@ export default defineConfig({
       // //   //   });
       // //   // }
 
-      // }
+      }
     }
 
   }
