@@ -8,7 +8,7 @@ export default defineConfig({
   //   global: 'window',
   //   },
   server: {
-    cors:false,
+    // cors:false,
     proxy: {
       // 'http://localhost:5173':'http://127.0.0.1:4444'
 //       // 'http://localhost:5173':'http://google.com'
@@ -21,14 +21,14 @@ export default defineConfig({
       //   secure:false,
       //   // ws:true
       // }
-  //  "/api":'https://et1-4efd4e5170d2.herokuapp.com'
+   "/api":'https://et1-4efd4e5170d2.herokuapp.com'
   
-      "/api/v1": {
-        target: 'https://et1-4efd4e5170d2.herokuapp.com/',
-        changeOrigin: true, 
+      // "/api/v1": {
+      //   target: 'https://et1-4efd4e5170d2.herokuapp.com/',
+      //   changeOrigin: true, 
         
-        secure:false,
-        ws:true
+      //   secure:false,
+      //   ws:true
 
 
       // //   // configure: (proxy, _options) => {
@@ -43,7 +43,7 @@ export default defineConfig({
       // //   //   });
       // //   // }
 
-      }
+      // }
     }
 
   }
