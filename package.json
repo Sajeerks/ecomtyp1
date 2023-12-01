@@ -1,0 +1,25 @@
+{
+  "name": "ecomtyp1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  
+    "start": "node backend/dist/server.js",
+    "postinstall": "tsc",
+    "watch-node": "nodemon backend/dist/server.js",
+    "watch-ts": "tsc -w",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sajeerks/ecomtyp1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sajeerks/ecomtyp1/issues"
+  },
+  "homepage": "https://github.com/Sajeerks/ecomtyp1#readme"
+}
