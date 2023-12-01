@@ -244,7 +244,7 @@ navigate("/allProducts")
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-         <MenuItem onClick={()=>{navigate("/") ; setMobileMoreAnchorEl(null)} }>
+         <MenuItem onClick={()=>{navigate("/home") ; setMobileMoreAnchorEl(null)} }>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
          
             <HomeIcon />
