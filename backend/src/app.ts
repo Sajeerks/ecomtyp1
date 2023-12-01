@@ -6,6 +6,7 @@ import fileUpload from 'express-fileupload'
 export const app = express()
 import {ErrorMiddleWare} from "./middleware/errorMaker"
 import dotenv from 'dotenv'
+import path from 'path'
 dotenv.config({path:"../backend/config/config.env"})
 
 app.use(express.json())
@@ -29,6 +30,20 @@ app.use( '/api/v1',productRouter)
 app.use( '/api/v1',userRouter)
 app.use( '/api/v1',orderRouter)
 app.use( '/api/v1',paymentRouter)
+
+
+
+
+
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")))
+// app.use(express.static(path.join(__dirname, "../frontend/build")), options)
+
+
+app.get("*", (req, res)=>{
+    res.sendFile(path.resolve(__dirname,"../../frontend/dist/index.html" ))
+})
+
 
 
 
