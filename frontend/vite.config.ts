@@ -20,7 +20,7 @@ export default defineConfig({
       //   secure:false,
       //   // ws:true
       // }
-   "/api/v1":'https://et1-4efd4e5170d2.herokuapp.com/'
+   "/api/v1":'https://et1-4efd4e5170d2.herokuapp.com'
   
       // "/api/v1": {
       //   target: 'https://et1-4efd4e5170d2.herokuapp.com/api/v1',
