@@ -46,6 +46,7 @@ import PasswordReset from './components/PasswordReset/PasswordReset';
 import OrdersList from './components/OrdersList/OrdersList';
 import OrderSingle from './components/OrderSingle.tsx/OrderSingle';
 import ContactForm from './components/ContactForm/ContactForm';
+import Home2 from './Home2/Home2';
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -169,7 +170,9 @@ const App = () => {
     <Route path="/password/reset/:resetPasswordTokenFromUrl" element={<PasswordReset/>} />
 
 
-    <Route path='/' element={<Home/>} />
+    <Route path='/home' element={<Home/>} />
+    <Route path='/' element={<Home2/>} />
+
     <Route path='/counter' element={<Counter/>} />
 
 
