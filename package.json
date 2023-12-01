@@ -2,7 +2,7 @@
   "name": "ecomtyp1",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "backend/dist/server.js",
   "scripts": {
   
     "start": "node backend/dist/server.js",
