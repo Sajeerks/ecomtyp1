@@ -1,14 +1,16 @@
+import { server1 } from "../../App"
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 // import { RootState } from '../store';
 import { userTypeInFrontEnd } from './userSlice22';
 
+
 export const getAllUsersInForntEnd = createAsyncThunk(  "allUsers/getAllUsersInForntEnd",  async (_, thunkApi) => {
     try {
      
   console.log("herrrr")
-      const { data } = await axios.get(   `/api/v1/allusers`,{
+      const { data } = await axios.get(   `${server1}/api/v1/allusers`,{
           headers:{
             'Content-type': 'application/json',
         },

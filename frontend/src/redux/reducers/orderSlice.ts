@@ -2,6 +2,7 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { server1 } from '../../App';
 // import { RootState } from '../store';
 
 
@@ -43,7 +44,7 @@ totalPrice: number
 export const createNewOrder = createAsyncThunk(  "orders/createNewOrder",  async ( orderDetails:CreateNewOrderParamsType, thunkApi) => {
     try {
     
-      const { data } = await axios.post(   `/api/v1/order/createNewOrder`,orderDetails,{
+      const { data } = await axios.post(   `${server1}/api/v1/order/createNewOrder`,orderDetails,{
         headers:{
         //   'Content-type': "multipart/form-data",
           'Content-type': 'application/json',
@@ -70,7 +71,7 @@ export const createNewOrder = createAsyncThunk(  "orders/createNewOrder",  async
   export const getAllOrdersFrontend = createAsyncThunk(  "orders/getAllOrdersFrontend",  async ( _, thunkApi) => {
     try {
     
-      const { data } = await axios.get(   `/api/v1/order/allordres`,{
+      const { data } = await axios.get(   `${server1}/api/v1/order/allordres`,{
         headers:{
         //   'Content-type': "multipart/form-data",
           'Content-type': 'application/json',
@@ -94,7 +95,7 @@ export const createNewOrder = createAsyncThunk(  "orders/createNewOrder",  async
   export const getSingleOrderForntend = createAsyncThunk(  "orders/getSingleOrderForntend",  async ( {orderId}:{orderId:string}, thunkApi) => {
     try {
     
-      const { data } = await axios.get(   `/api/v1/order/${orderId}`,{
+      const { data } = await axios.get(   `${server1}/api/v1/order/${orderId}`,{
         headers:{
         //   'Content-type': "multipart/form-data",
           'Content-type': 'application/json',
@@ -124,7 +125,7 @@ interface updateOrderType{
     console.log(status);
 
 
-      const { data } = await axios.put(   `/api/v1/order/${orderId}`,{status},{
+      const { data } = await axios.put(   `${server1}/api/v1/order/${orderId}`,{status},{
         headers:{
         //   'Content-type': "multipart/form-data",
           'Content-type': 'application/json',

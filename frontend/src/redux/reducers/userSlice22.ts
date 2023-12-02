@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../store';
+import { server1 } from '../../App';
 
 
 
@@ -15,7 +16,7 @@ export const loginUser = createAsyncThunk(  "user/loginUser",  async (loginDetai
       try {
        
     // console.log({loginDetails})
-        const { data } = await axios.post(   `/api/v1/login`,loginDetails,{
+        const { data } = await axios.post(   `${server1}/api/v1/login`,loginDetails,{
             headers:{
               'Content-type': 'application/json',
           },
@@ -36,7 +37,7 @@ export const loginUser = createAsyncThunk(  "user/loginUser",  async (loginDetai
     try {
      
   // console.log({loginDetails})
-      const { data } = await axios.get(   `/api/v1/logout`,{
+      const { data } = await axios.get(   `${server1}/api/v1/logout`,{
           headers:{
             'Content-type': 'application/json',
         },
@@ -58,7 +59,7 @@ export const getAutheticatedUserME = createAsyncThunk(  "user/getAutheticatedUse
   try {
    
 // console.log({loginDetails})
-    const { data } = await axios.get(   `/api/v1/me`,{
+    const { data } = await axios.get(   `${server1}/api/v1/me`,{
         headers:{
           'Content-type': 'application/json',
       },
@@ -80,7 +81,7 @@ export const delteTheUserByAdmin = createAsyncThunk(  "user/delteTheUserByAdmin"
   try {
    
 // console.log({loginDetails})
-    const { data } = await axios.delete(   `/api/v1/admin/user/${id}`,{
+    const { data } = await axios.delete(   `${server1}/api/v1/admin/user/${id}`,{
         headers:{
           'Content-type': 'application/json',
       },
@@ -103,7 +104,7 @@ export const changeUserRoleAdmin = createAsyncThunk(  "user/changeUserRoleAdmin"
   try {
    
 // console.log({loginDetails})
-    const { data } = await axios.put(   `/api/v1/admin/roleChange/${id}`,{
+    const { data } = await axios.put(   `${server1}/api/v1/admin/roleChange/${id}`,{
         headers:{                           
           'Content-type': 'application/json',
       },
@@ -127,7 +128,7 @@ export const forGotPasswordActionFrontend = createAsyncThunk(  "user/forGotPassw
   try {
    
 // console.log({loginDetails})
-    const { data } = await axios.put(   `/api/v1/forgotPassword`,email,{
+    const { data } = await axios.put(   `${server1}/api/v1/forgotPassword`,email,{
         headers:{                           
           'Content-type': 'application/json',
       },
@@ -154,7 +155,7 @@ export const resetPasswordActionFrontend = createAsyncThunk(  "user/resetPasswor
   try {
    
 // console.log({loginDetails})
-    const { data } = await axios.put(   `/api/v1/password/reset/${resetPasswordTokenFromUrl}`,{password,confirmPassword},{
+    const { data } = await axios.put(   `${server1}/api/v1/password/reset/${resetPasswordTokenFromUrl}`,{password,confirmPassword},{
         headers:{                           
           'Content-type': 'application/json',
       },
@@ -185,7 +186,7 @@ export const signUpNewUser = createAsyncThunk(  "user/signUpNewUser",  async ( f
     for (var pair of formData.entries()) {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
-    const { data } = await axios.post(   `/api/v1/register`,formData,{
+    const { data } = await axios.post(   `${server1}/api/v1/register`,formData,{
       headers:{
         'Content-type': "multipart/form-data",
         // 'Content-type': 'application/json',
@@ -213,7 +214,7 @@ export const updateTheUserDetails = createAsyncThunk(  "user/updateTheUserDetail
     for (var pair of formData.entries()) {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
-    const { data } = await axios.put(   `/api/v1/updateUserprofile`,formData,{
+    const { data } = await axios.put(   `${server1}/api/v1/updateUserprofile`,formData,{
       headers:{
         'Content-type': "multipart/form-data",
         // 'Content-type': 'application/json',
@@ -241,7 +242,7 @@ export const changePasswordOfTheUser = createAsyncThunk(  "user/changePasswordOf
     for (var pair of formData.entries()) {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
-    const { data } = await axios.put(   `/api/v1/changepassword`,formData,{
+    const { data } = await axios.put(   `${server1}/api/v1/changepassword`,formData,{
       headers:{
         // 'Content-type': "multipart/form-data",
         'Content-type': 'application/json',

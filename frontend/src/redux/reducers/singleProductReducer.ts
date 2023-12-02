@@ -1,6 +1,7 @@
 import { ProductTypeFrontend } from './productReducer22';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { server1 } from '../../App';
 // import { RootState } from '../store';
 
 
@@ -20,7 +21,7 @@ export const AddPostReview = createAsyncThunk( "products/addPostReview", async (
 
 
         const { data } = await axios.put(
-          `/api/v1/createReview`,neWREview,{
+          `${server1}/api/v1/createReview`,neWREview,{
           headers:{
             'Content-type': 'application/json',
         },
@@ -52,7 +53,7 @@ export const AddPostReview = createAsyncThunk( "products/addPostReview", async (
 // console.log("id In getSIngleProducts--",id);
 
       const { data } = await axios.get(
-        `/api/v1/product/${id}` );
+        `${server1}/api/v1/product/${id}` );
 //  console.log("data.product==",data);
       return data
 
@@ -81,7 +82,7 @@ for (var pair of myForm.entries()) {
 }
 
     const { data } = await axios.put(
-      `/api/v1/product/${id}`, myForm,{
+      `${server1}/api/v1/product/${id}`, myForm,{
         headers:{
           'Content-type': "multipart/form-data",
           // 'Content-type': 'application/json',
@@ -122,7 +123,7 @@ export const deleteSingleProduct = createAsyncThunk( "product/deleteSingleProduc
 // console.log("id In getSIngleProducts--",id);
 
     const { data } = await axios.delete(
-      `/api/v1/product/${id}` );
+      `${server1}/api/v1/product/${id}` );
 //  console.log("data.product==",data);
     return data
 
@@ -170,7 +171,7 @@ for (var pair of newProductData.entries()) {
 }
 console.log({newProductData});
     const { data } = await axios.post(
-      `/api/v1/createproduct`,newProductData,{
+      `${server1}/api/v1/createproduct`,newProductData,{
         headers:{
           'Content-type': "multipart/form-data",
           // 'Content-type': 'application/json',

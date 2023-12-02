@@ -101,13 +101,13 @@ const darkTheme = createTheme({
     fontWeightRegular:800,
   },
 });
+export const server1 = "https://et1-4efd4e5170d2.herokuapp.com/"
 
 
 const App = () => {
   const dispatch =useDispatch<AppDispatch>()
   const loggedInUser = useSelector((state:RootState)=>getLoggedInUser(state))
   
-   
      
 
   const [darkThemer, setdarkTheme] = useState(false)
@@ -116,7 +116,7 @@ const App = () => {
   const [stripeApiKey, setstripeApiKey] = useState("")
 
   async function getStripeApiKey() {
-    const {data} = await axios.get("/api/v1/stripeapikey")
+    const {data} = await axios.get(`${server1}/api/v1/stripeapikey`)
     // console.log({data});
     setstripeApiKey(data.stripeApikey)
   }

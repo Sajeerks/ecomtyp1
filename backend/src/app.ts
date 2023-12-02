@@ -14,6 +14,19 @@ app.use(cookieParser())
 app.use(fileUpload())
 app.use(cors())
 
+app.use(
+    express.urlencoded({
+      extended: true,
+    })
+  );
+  app.use(
+    cors({
+      origin: process.env.FRONTEND_URL,
+      credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE"],
+    })
+  );
+
 
 import { productRouter  } from './routes/productRoute'
 import { userRouter } from './routes/userRoute'

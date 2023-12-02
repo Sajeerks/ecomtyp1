@@ -1,6 +1,7 @@
 import  { RootState } from './../store';
 import { createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { server1 } from '../../App';
 
 // import { id } from "date-fns/locale";
 
@@ -59,11 +60,11 @@ console.log({keywordFromLoaclStore});
    console.log({keyword, page, price,category, ratings });
 
 
-   let link:string =   `/api/v1/allproducts?keyword=${keyword}&page=${page}
+   let link:string =   `${server1}/api/v1/allproducts?keyword=${keyword}&page=${page}
    &ratings[gte]=${ratings}&price[gte]=${price[0]}&price[lte]=${price[1]}`
    if(category){
       link  = 
-      `/api/v1/allproducts?keyword=${keyword}&page=${page}
+      `${server1}/api/v1/allproducts?keyword=${keyword}&page=${page}
       &ratings[gte]=${ratings}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`
   
    }
@@ -93,7 +94,7 @@ export const fetAllProductsAdmin = createAsyncThunk(
 
 
    
-    const {data} = await axios.get("/api/v1/admin/AllproductsList")
+    const {data} = await axios.get(`${server1}api/v1/admin/AllproductsList`)
 
     // console.log(data);
       return data
