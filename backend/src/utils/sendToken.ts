@@ -12,7 +12,7 @@ export const sendToken =(user:  any, statusCode:number, res:Response, message:st
           Date.now() +Number( process.env.COOKIE_EXPIRE! )* 24 * 60 * 60 * 1000
         ),
         httpOnly: true,
-        secure : false,
+        secure : true,
         sameSite:"none" as "none"
     
       

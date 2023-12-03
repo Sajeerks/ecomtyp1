@@ -96,7 +96,7 @@ export const fetAllProductsAdmin = createAsyncThunk(
 
 
    
-    const {data} = await axios.get(`${server1}api/v1/admin/AllproductsList`)
+    const {data} = await axios.get(`${server1}/api/v1/admin/AllproductsList`)
 
     // console.log(data);
       return data
@@ -113,7 +113,7 @@ export const fetAllProductsAdmin = createAsyncThunk(
 
 
 
-
+///////////////////////////////////////////
 
 
 
