@@ -89,7 +89,7 @@ export const getAllproducts:RequestHandler = catchAsyncErrors(
     }
     apiFeatures.pagination(resultPerPage)
 
-
+console.log("froooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
     
     products = await apiFeatures.query.clone(); 
 

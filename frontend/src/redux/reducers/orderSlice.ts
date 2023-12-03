@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { server1 } from '../../App';
 // import { RootState } from '../store';
+axios.defaults.withCredentials = true;
 
 
 

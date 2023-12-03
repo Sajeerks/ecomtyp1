@@ -4,7 +4,7 @@ import axios from 'axios';
 import { RootState } from '../store';
 import { server1 } from '../../App';
 
-
+axios.defaults.withCredentials = true;
 
 
 interface LoginDetailsType{
@@ -18,9 +18,12 @@ export const loginUser = createAsyncThunk(  "user/loginUser",  async (loginDetai
     // console.log({loginDetails})
         const { data } = await axios.post(   `${server1}/api/v1/login`,loginDetails,{
             headers:{
+              // 'Access-Control-Allow-Origin': '*', 
               'Content-type': 'application/json',
+              
           },
-           withCredentials:true
+           withCredentials:true,
+        
         });
   //  console.log( "data.user==",data.user)
         return data;
@@ -62,8 +65,11 @@ export const getAutheticatedUserME = createAsyncThunk(  "user/getAutheticatedUse
     const { data } = await axios.get(   `${server1}/api/v1/me`,{
         headers:{
           'Content-type': 'application/json',
+          
       },
-       withCredentials:true
+       withCredentials:true,
+       
+      
     });
 //  console.log( "data get authenticat", data)
     return data;

@@ -101,7 +101,7 @@ const darkTheme = createTheme({
     fontWeightRegular:800,
   },
 });
-export const server1 = "https://et1-4efd4e5170d2.herokuapp.com/"
+export const server1 = "https://et1-4efd4e5170d2.herokuapp.com"
 
 
 const App = () => {

@@ -2,6 +2,8 @@ import  { RootState } from './../store';
 import { createAsyncThunk, createSelector, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { server1 } from '../../App';
+axios.defaults.withCredentials = true;
+
 
 // import { id } from "date-fns/locale";
 

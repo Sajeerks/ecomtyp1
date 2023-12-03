@@ -4,6 +4,8 @@ import { PayloadAction, createAsyncThunk, createSlice, nanoid, createSelector } 
 import { RootState } from '../store';
 import axios from 'axios';
 import { sub } from 'date-fns';
+axios.defaults.withCredentials = true;
+
 
 export interface PostStateType{
     id: string;

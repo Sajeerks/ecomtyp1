@@ -9,20 +9,24 @@ import dotenv from 'dotenv'
 import path from 'path'
 dotenv.config({path:"../backend/config/config.env"})
 
-app.use(express.json())
-app.use(cookieParser())
-app.use(fileUpload())
-app.use(cors())
 
+
+app.use(fileUpload())
+
+app.use(express.json())
 app.use(
     express.urlencoded({
       extended: true,
     })
   );
+  app.use(cookieParser())
+
   app.use(
     cors({
       origin: process.env.FRONTEND_URL,
+
       credentials: true,
+      // methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
       methods: ["GET", "POST", "PUT", "DELETE"],
     })
   );
@@ -49,16 +53,20 @@ app.use( '/api/v1',paymentRouter)
 
 
 
-app.use(express.static(path.join(__dirname, "../../frontend/dist")))
-// app.use(express.static(path.join(__dirname, "../frontend/build")), options)
+// app.use(express.static(path.join(__dirname, "../../frontend/dist")))
+// // app.use(express.static(path.join(__dirname, "../frontend/build")), options)
 
 
-app.get("*", (req, res)=>{
-    res.sendFile(path.resolve(__dirname,"../../frontend/dist/index.html" ))
-})
+// app.get("*", (req, res)=>{
+//     res.sendFile(path.resolve(__dirname,"../../frontend/dist/index.html" ))
+// })
 
 
-
+app.get("/", (req, res) =>
+  res.send(
+    `<h1>Site is Working. click <a href=${process.env.FRONTEND_URL}>here</a> to visit frontend.</h1>`
+  )
+);
 
 
 

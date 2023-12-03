@@ -2,17 +2,16 @@ import { Box, Button, Container, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { loginUser } from '../../redux/reducers/userSlice22'
+import { loginUser, resetSingleUserMessage } from '../../redux/reducers/userSlice22'
 import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
-import { resetMessageForSingleProductReducer } from '../../redux/reducers/singleProductReducer'
 
 const LoginPage = () => {
     const navigate  = useNavigate()
 
     const [formdatas, setformdatas] = useState({
         
-        email:"sajeer@sajeer.com",
+        email:"sajeersayed@gmail.com",
         password:"qqqqqqqq"
     })
 
@@ -87,7 +86,7 @@ useEffect(() => {
 
 useEffect(() => {
   toast.warning(message)
-  dispatch(resetMessageForSingleProductReducer())
+  dispatch(resetSingleUserMessage())
 }, [message])
 
 

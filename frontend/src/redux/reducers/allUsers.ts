@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 // import { RootState } from '../store';
 import { userTypeInFrontEnd } from './userSlice22';
+axios.defaults.withCredentials = true;
 
 
 export const getAllUsersInForntEnd = createAsyncThunk(  "allUsers/getAllUsersInForntEnd",  async (_, thunkApi) => {

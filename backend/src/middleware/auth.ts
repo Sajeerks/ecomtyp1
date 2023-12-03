@@ -17,8 +17,8 @@ interface JwtPayload {
   
 export const isAuthenticatedUser = catchAsyncErrors(async(req:Request, res:Response, next:NextFunction)=>{
     const {token} = req.cookies
-
-    // console.log("tokenf for  authjs==" + token)
+    
+    console.log("tokenf for  authjs==" + token)
  if(!token){
     return next(new ErrorHandler("please login to view the resource", 401))
  }
