@@ -22,6 +22,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import axios from "axios";
 import { CreateNewOrderParamsType, createNewOrder } from "../../redux/reducers/orderSlice";
 import { useNavigate } from "react-router-dom";
+import { server1 } from "../../App";
 
 
 
@@ -133,8 +134,8 @@ const navigate = useNavigate()
             headers: { "Content-Type": "application/json" },
           };
           const { data } = await axios.post(
-            // "/api/v1/payment/process",
-            "/api/v1/payment/process",
+            
+            `${server1}/api/v1/payment/process`,
             paymentData,
             config
           );
@@ -161,7 +162,7 @@ const navigate = useNavigate()
           });
       
           if (result.error) {
-           /// console.log("resutlt error:", result)
+           console.log("resutlt error:", result)
             payBtn.current!.disabled = false;
             window.alert(result.error.message || " there is an error in stripe payment") ;
           }else{
