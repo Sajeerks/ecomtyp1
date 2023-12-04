@@ -23,7 +23,7 @@ import axios from "axios";
 import { CreateNewOrderParamsType, createNewOrder } from "../../redux/reducers/orderSlice";
 import { useNavigate } from "react-router-dom";
 import { server1 } from "../../App";
-
+axios.defaults.withCredentials = true;
 
 
 
@@ -132,12 +132,14 @@ const navigate = useNavigate()
         try {
           const config = {
             headers: { "Content-Type": "application/json" },
+            withCredentials:true,
           };
           const { data } = await axios.post(
             
             `${server1}/api/v1/payment/process`,
             paymentData,
-            config
+            config,
+            
           );
           const client_secret = data.client_secret;
           console.log("client_secret :",client_secret)
