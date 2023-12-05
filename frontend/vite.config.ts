@@ -7,15 +7,15 @@ export default defineConfig({
   // define: {
   //   global: 'window',
   //   },
-  build: {
-    // generate .vite/manifest.json in outDir
-    manifest: true,
-    rollupOptions: {
-      // overwrite default .html entry
-      // input: 'src/main.tsx' // 'path/to/main.js'
+  // build: {
+  //   // generate .vite/manifest.json in outDir
+  //   manifest: true,
+  //   rollupOptions: {
+  //     // overwrite default .html entry
+  //     // input: 'src/main.tsx' // 'path/to/main.js'
       
-    },
-  },
+  //   },
+  // },
   server: {
     // cors:false,
     proxy: {
