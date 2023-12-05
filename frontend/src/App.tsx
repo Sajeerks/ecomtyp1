@@ -46,7 +46,7 @@ import PasswordReset from './components/PasswordReset/PasswordReset';
 import OrdersList from './components/OrdersList/OrdersList';
 import OrderSingle from './components/OrderSingle.tsx/OrderSingle';
 import ContactForm from './components/ContactForm/ContactForm';
-import Home2 from './Home2/Home2';
+// import Home2 from './Home2/Home2';
 
 declare module '@mui/material/styles' {
   interface Theme {
