@@ -168,10 +168,10 @@ const App = () => {
     <Route path="/orders/order/:orderId" element={<OrderSingle/>} />
     <Route path="/forgotpassword" element={<ForgotPassword/>} />
     <Route path="/password/reset/:resetPasswordTokenFromUrl" element={<PasswordReset/>} />
+  
 
-
-    <Route path='/home' element={<Home/>} />
-    <Route path='/' element={<Home2/>} />
+    <Route path='/' element={<Home/>} />
+    {/* <Route path='/' element={<Home2/>} /> */}
 
     <Route path='/counter' element={<Counter/>} />
 

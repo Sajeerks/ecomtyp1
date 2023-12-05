@@ -244,7 +244,7 @@ navigate("/allProducts")
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-         <MenuItem onClick={()=>{navigate("/home") ; setMobileMoreAnchorEl(null)} }>
+         <MenuItem onClick={()=>{navigate("/") ; setMobileMoreAnchorEl(null)} }>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
          
             <HomeIcon />
@@ -252,8 +252,8 @@ navigate("/allProducts")
         </IconButton>
         <p>Home</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={()=>{navigate("/cart"); setMobileMoreAnchorEl(null)}}>
+      <MenuItem onClick={()=>{navigate("/cart"); setMobileMoreAnchorEl(null)}}>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit" >
           <Badge badgeContent={cartItmesCount} color="error">
             <ShoppingCartIcon />
           </Badge>
@@ -362,7 +362,7 @@ navigate("/allProducts")
             { darkThemer ?   <IconButton onClick={()=>setdarkTheme(!darkThemer)} ><WbSunnyIcon /> </IconButton>  :  <IconButton onClick={()=>setdarkTheme(!darkThemer)}><DarkModeIcon/></IconButton>}
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={()=>{navigate("/cart"); setMobileMoreAnchorEl(null)}}>
               <Badge badgeContent={cartItmesCount} color="error">
                 <ShoppingCartIcon />
               </Badge>
